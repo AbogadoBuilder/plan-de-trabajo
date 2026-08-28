@@ -1,1 +1,114 @@
-1
+<!DOCTYPE html>
+<html lang="es-MX">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan Compliance Normativo 2026 - ABOGADO BUILDER - Export PDF</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<style>
+*{box-sizing:border-box} body{margin:0;font-family:'Inter',system-ui,sans-serif;background:#f6f7f9;color:#0f2a44;line-height:1.65}
+.container{max-width:1150px;margin:0 auto;padding:24px 20px 60px}
+.header{background:#0a0a0a;color:#fff;border-radius:20px;padding:28px 32px;border:1px solid #222}
+.membrete{display:flex;align-items:center;gap:18px;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:18px;margin-bottom:18px;flex-wrap:wrap}
+.membrete img{width:92px;height:92px;object-fit:contain;background:#000;border-radius:12px;padding:6px;border:1px solid #333}
+.badge{display:inline-flex;padding:6px 12px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
+.badge-gold{background:#c5a46b;color:#0f2a44}.badge-legal{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
+.card{background:#fff;border:1px solid #e5e7eb;border-radius:14px;padding:22px 24px;margin-top:16px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}@media(max-width:900px){.grid2{grid-template-columns:1fr}}
+table{width:100%;border-collapse:collapse;font-size:13px}th{text-align:left;font-size:10px;text-transform:uppercase;color:#6b7280;padding:11px 12px;background:#f9fafb;border-bottom:1px solid #e5e7eb}td{padding:11px 12px;border-bottom:1px solid #f1f5f9;vertical-align:top}
+.chip{display:inline-flex;padding:5px 10px;border-radius:999px;background:#f1f5f9;border:1px solid #e2e8f0;font-size:12px;font-weight:600}
+.sig-line{border-top:1px solid #0f2a44;margin-top:28px;padding-top:6px;font-size:11px;font-weight:700}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:999px;font-size:13px;font-weight:700;border:1px solid;cursor:pointer}
+.btn-gold{background:#c5a46b;color:#0f2a44;border-color:#c5a46b}.btn-dark{background:#0f2a44;color:#fff;border-color:#0f2a44}.btn-white{background:#fff;color:#0f2a44;border-color:#e5e7eb}
+.toolbar{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin-bottom:16px}
+.input{border:1px dashed #cbd5e1;border-radius:8px;padding:8px 10px;font-size:12px;color:#64748b;background:#f8fafc;min-height:38px}
+</style>
+</head>
+<body>
+<div class="container">
+  <div class="toolbar">
+    <button class="btn btn-white" onclick="copyHTML()">📋 Copiar HTML</button>
+    <button class="btn btn-dark" onclick="window.print()">🖨️ Imprimir</button>
+    <button class="btn btn-gold" onclick="exportToPDF()">📄 Exportar a PDF</button>
+  </div>
+  <div id="contenido-pdf">
+    <div class="header">
+      <div class="membrete">
+        <img src="logo-abogado-builder.jpg" alt="Abogado Builder">
+        <div>
+          <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700">ABOGADO BUILDER</div>
+          <div style="font-size:13px;opacity:.7">Miguel Coyotecatl</div>
+          <div style="display:flex;gap:8px;margin-top:10px"><span class="badge badge-gold">COMPLIANCE 2026</span><span class="badge badge-legal">Área Legal Corporativa</span><span class="badge badge-legal">Capital Humano</span></div>
+        </div>
+      </div>
+      <h1 style="margin:0 0 8px;font-size:30px;font-weight:800">Plan de Trabajo - Compliance Normativo<br>CDMX Septiembre 2026</h1>
+      <p style="margin:0;opacity:.8;font-size:13px">Sucursales: Del Valle, Nápoles, Roma y Centro de Producción | Lic. Miguel Coyotecatl (Compliance) y Lic. Adolfo (CH) | Con AMAS - No discriminación perros de servicio</p>
+    </div>
+    <div class="card" style="border-left:4px solid #c5a46b">
+      <h2>Responsables Titulares</h2>
+      <div class="grid2">
+        <div style="border:2px solid #0f2a44;border-radius:12px;padding:16px;background:#f8fafc">
+          <div style="font-size:11px;font-weight:800">TITULAR COMPLIANCE NORMATIVO</div>
+          <div style="font-size:18px;font-weight:800;margin-top:6px">Lic. Miguel Coyotecatl</div>
+          <div style="font-size:11px;color:#475569">ABOGADO BUILDER - Área Legal Corporativa</div>
+          <ul style="font-size:12px;margin:10px 0 0 16px"><li>Auditoría documental Semana 1 (1-5 SEP)</li><li>Validación vigencia 6 meses</li><li>Gestoría BEA, PC, Alcaldía</li><li>Carpeta final y resguardo digital</li></ul>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px"><div class="sig-line">Firma: Lic. Miguel Coyotecatl</div><div class="sig-line">Fecha: ___/___/2026</div></div>
+        </div>
+        <div style="border:1px solid #e5e7eb;border-radius:12px;padding:16px">
+          <div style="font-size:11px;font-weight:800;color:#c5a46b">TITULAR CAPITAL HUMANO</div>
+          <div style="font-size:18px;font-weight:800;margin-top:6px">Lic. Adolfo</div>
+          <div style="font-size:11px;color:#475569">Capital Humano</div>
+          <ul style="font-size:12px;margin:10px 0 0 16px"><li>Convocatorias Semana 2 y 3</li><li>Listas asistencia y constancias</li><li>Coordinación AMAS</li><li>Bitácoras y resguardo físico</li></ul>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px"><div class="sig-line">Firma: Lic. Adolfo</div><div class="sig-line">Fecha: ___/___/2026</div></div>
+        </div>
+      </div>
+    </div>
+    <div class="card">
+      <h2>Cronograma Corregido - Septiembre 2026</h2>
+      <table>
+        <thead><tr><th>Semana</th><th>Fase</th><th>Actividad</th><th>Responsable</th></tr></thead>
+        <tbody>
+          <tr><td><strong>1-5 SEP</strong></td><td>FASE 1 Auditoría</td><td>Revisión documentos normativos 4 unidades para identificar faltantes y subsanarlos</td><td>Lic. Miguel Coyotecatl</td></tr>
+          <tr style="background:#f0f7ff"><td><strong>8-12 SEP</strong></td><td>FASE 2 Equipo Filtro</td><td>Capacitar al Equipo Filtro (Encargado, Subgerente, Hostess) para BEA, Protección Civil, Alcaldía</td><td>Lic. Miguel + Lic. Adolfo</td></tr>
+          <tr><td><strong>15-19 SEP</strong></td><td>FASE 3 AMAS</td><td>Capacitación perros servicio con AMAS para evitar discriminaciones a comensales con perros de servicio</td><td>AMAS + Adolfo + Miguel</td></tr>
+          <tr><td><strong>22-30 SEP</strong></td><td>Cierre</td><td>Entrega 4 carpetas físicas + digitales</td><td>RU + Legal + CH</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="grid2">
+      <div class="card">
+        <h2>Entregables + Bitácoras + Listas</h2>
+        <ul style="font-size:12px"><li>☐ Matriz faltantes Excel</li><li>☐ Carpeta Drive PDFs</li><li>☐ Lista asistencia BEA/PC/Alcaldía (Lic. Adolfo)</li><li>☐ Lista asistencia AMAS perros servicio</li><li>☐ Guion autoridades + Protocolo antidiscriminación</li><li>☐ Bitácoras firmadas + Constancias + Fotos</li></ul>
+      </div>
+      <div class="card">
+        <h2>Formatos</h2>
+        <div style="border:1.5px solid #0f2a44;border-radius:10px;padding:12px;font-size:11px">
+          <div>Fecha: ___/___/2026 - Unidad: Valle/Nápoles/Roma/Prod</div>
+          <div style="margin-top:8px">Hallazgos:<div class="input" style="min-height:44px;margin-top:4px"></div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px"><div class="sig-line">Firma RU</div><div class="sig-line">Firma Lic. Miguel Coyotecatl</div></div>
+        </div>
+        <div style="margin-top:12px;background:#0f2a44;color:#fff;border-radius:10px;padding:12px;font-size:12px"><strong style="color:#c5a46b">Guion Antidiscriminación:</strong> "Bienvenido, por política de inclusión y para evitar discriminación, los perros de servicio son bienvenidos."</div>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+function exportToPDF(){
+  const element = document.getElementById('contenido-pdf');
+  const opt = {
+    margin: [10,10,10,10],
+    filename: 'Plan_Compliance_Normativo_2026_ABOGADO_BUILDER.pdf',
+    image: { type: 'jpeg', quality: 0.98 },
+    html2canvas: { scale: 2, useCORS: true, backgroundColor: '#ffffff' },
+    jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
+  };
+  html2pdf().set(opt).from(element).save();
+}
+function copyHTML(){
+  const htmlContent = document.documentElement.outerHTML;
+  navigator.clipboard.writeText(htmlContent).then(()=>{alert('HTML copiado ✅')});
+}
+</script>
+</body>
+</html>
