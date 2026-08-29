@@ -15,7 +15,9 @@ body{margin:0;font-family:'Inter',system-ui,sans-serif;background:#f6f7f9;color:
 .container{max-width:1150px;margin:0 auto;padding:24px 20px 60px}
 
 /* ─── Barra de herramientas (no se imprime ni sale en el PDF) ─── */
-.toolbar{display:flex;gap:10px;flex-wrap:wrap;justify-content:flex-end;margin-bottom:16px}
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;margin-bottom:16px}
+.hint{font-size:12px;color:#64748b}
+.actions{display:flex;gap:10px;flex-wrap:wrap}
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:46px;padding:10px 20px;border-radius:999px;font-family:inherit;font-size:14px;font-weight:700;border:1px solid;cursor:pointer;-webkit-tap-highlight-color:transparent;transition:transform .1s,opacity .2s}
 .btn:active{transform:scale(.97)}
 .btn[disabled]{opacity:.55;cursor:wait}
@@ -27,7 +29,7 @@ body{margin:0;font-family:'Inter',system-ui,sans-serif;background:#f6f7f9;color:
 .header{background:#0a0a0a;color:#fff;border-radius:20px;padding:28px 32px;border:1px solid #222}
 .header h1{font-size:30px;font-weight:800;margin:0 0 8px;line-height:1.25}
 .membrete{display:flex;align-items:center;gap:18px;border-bottom:1px solid rgba(255,255,255,.12);padding-bottom:18px;margin-bottom:18px;flex-wrap:wrap}
-.logo{width:92px;height:92px;flex:0 0 auto;display:block}
+.logo{width:92px;height:92px;flex:0 0 auto;display:block;object-fit:contain;background:#000;border-radius:12px;padding:6px;border:1px solid #333}
 .badge{display:inline-flex;padding:6px 12px;border-radius:999px;font-size:11px;font-weight:800;letter-spacing:.08em;text-transform:uppercase}
 .badge-gold{background:#c5a46b;color:#0f2a44}
 .badge-legal{background:rgba(255,255,255,.12);color:#fff;border:1px solid rgba(255,255,255,.2)}
@@ -45,6 +47,20 @@ tr{page-break-inside:avoid;break-inside:avoid}
 .sig-line{border-top:1px solid #0f2a44;margin-top:28px;padding-top:6px;font-size:11px;font-weight:700}
 .input{border:1px dashed #cbd5e1;border-radius:8px;padding:8px 10px;font-size:12px;color:#64748b;background:#f8fafc;min-height:38px}
 
+/* ─── Campos editables ─── */
+.edit{display:inline-block;min-width:90px;border-bottom:1px dashed #94a3b8;padding:0 6px;outline:none}
+.edit:focus{border-bottom:1px solid #0f2a44;background:#f0f7ff}
+.edit:not(:empty){border-bottom-style:solid;border-bottom-color:#c5a46b}
+.edit:empty::before{content:attr(data-ph);color:#94a3b8}
+.edit-box{outline:none;white-space:pre-wrap;word-break:break-word;min-height:44px}
+.edit-box:focus{border:1px solid #0f2a44;background:#fff}
+.edit-box:empty::before{content:attr(data-ph);color:#94a3b8;font-style:italic}
+
+/* ─── Casillas ☐ (clic para marcar) ─── */
+.chk{display:inline-block;min-width:22px;padding:6px 2px 6px 0;margin-left:-6px;cursor:pointer;user-select:none;-webkit-user-select:none;outline:none;border-radius:6px}
+.chk:hover{color:#c5a46b}
+.chk:focus-visible{box-shadow:0 0 0 2px #c5a46b}
+
 /* ─── Móvil ─── */
 @media(max-width:900px){
   .container{padding:16px 14px 40px}
@@ -53,8 +69,11 @@ tr{page-break-inside:avoid;break-inside:avoid}
   .header h1{font-size:24px}
 }
 @media(max-width:480px){
-  .toolbar{flex-direction:column}
-  .toolbar .btn{width:100%}
+  .toolbar{flex-direction:column;align-items:stretch}
+  .hint{text-align:center}
+  .actions{flex-direction:column}
+  .actions .btn{width:100%}
+  .logo{width:72px;height:72px}
 }
 
 /* ─── Impresión (Ctrl+P / botón Imprimir) ─── */
@@ -72,25 +91,21 @@ tr{page-break-inside:avoid;break-inside:avoid}
 <div class="container">
 
   <div class="toolbar">
-    <button type="button" id="btn-print" class="btn btn-white" onclick="window.print()">🖨️ Imprimir</button>
-    <button type="button" id="btn-pdf" class="btn btn-gold" onclick="exportToPDF()">📄 Exportar a PDF</button>
+    <div class="hint">✏️ Los campos punteados son editables: haz clic para escribir · Los ☐ se marcan con un clic</div>
+    <div class="actions">
+      <button type="button" id="btn-print" class="btn btn-white" onclick="window.print()">🖨️ Imprimir</button>
+      <button type="button" id="btn-pdf" class="btn btn-gold" onclick="exportToPDF()">📄 Exportar a PDF</button>
+    </div>
   </div>
 
   <div id="contenido-pdf">
 
     <div class="header">
       <div class="membrete">
-        <!-- ══ LOGO ══ Marcador de posición 100% autónomo (no depende de archivos externos).
-             Cuando tengas el logo real: conviértelo a base64 (p. ej. base64-image.de),
-             borra este bloque <svg> y en su lugar escribe:
-             <img class="logo" src="data:image/jpeg;base64,TU_CÓDIGO_AQUÍ" alt="Abogado Builder"> -->
-        <svg class="logo" viewBox="0 0 92 92" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Abogado Builder">
-          <rect width="92" height="92" rx="12" fill="#000"></rect>
-          <rect x="4" y="4" width="84" height="84" rx="9" fill="none" stroke="#c5a46b" stroke-width="1.5"></rect>
-          <text x="46" y="55" text-anchor="middle" font-family="Playfair Display, Georgia, serif" font-size="30" font-weight="700" fill="#c5a46b">AB</text>
-          <line x1="24" y1="66" x2="68" y2="66" stroke="#c5a46b" stroke-width="1" opacity=".55"></line>
-          <text x="46" y="79" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="5.5" letter-spacing="1.4" fill="#9aa3ad">ABOGADO BUILDER</text>
-        </svg>
+        <!-- Logo oficial. Al abrir la página se convierte automáticamente a base64
+             para que el PDF siempre lo incluya. Para un archivo 100% sin internet,
+             sustituye el src por: data:image/jpeg;base64,TU_CÓDIGO -->
+        <img class="logo" src="https://i.ibb.co/6Jng0Z5S/29d572b7-060d-4258-a958-7776e1c86054.jpg" alt="Logotipo Abogado Builder" referrerpolicy="no-referrer">
         <div>
           <div style="font-family:'Playfair Display',serif;font-size:22px;font-weight:700">ABOGADO BUILDER</div>
           <div style="font-size:13px;opacity:.7">Miguel Coyotecatl</div>
@@ -114,7 +129,10 @@ tr{page-break-inside:avoid;break-inside:avoid}
             <li>Gestoría BEA, Protección Civil y Alcaldía</li>
             <li>Carpeta final y resguardo digital</li>
           </ul>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px"><div class="sig-line">Firma: Lic. Miguel Coyotecatl</div><div class="sig-line">Fecha: ___/___/2026</div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px">
+            <div class="sig-line">Firma: Lic. Miguel Coyotecatl</div>
+            <div class="sig-line">Fecha: <span class="edit" contenteditable="true" spellcheck="false" data-single data-ph="___/___/2026"></span></div>
+          </div>
         </div>
         <div style="border:1px solid #e5e7eb;border-radius:12px;padding:16px">
           <div style="font-size:11px;font-weight:800;color:#c5a46b">TITULAR CAPITAL HUMANO</div>
@@ -126,7 +144,10 @@ tr{page-break-inside:avoid;break-inside:avoid}
             <li>Coordinación con AMAS</li>
             <li>Bitácoras y resguardo físico</li>
           </ul>
-          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px"><div class="sig-line">Firma: Lic. Adolfo</div><div class="sig-line">Fecha: ___/___/2026</div></div>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:18px">
+            <div class="sig-line">Firma: Lic. Adolfo</div>
+            <div class="sig-line">Fecha: <span class="edit" contenteditable="true" spellcheck="false" data-single data-ph="___/___/2026"></span></div>
+          </div>
         </div>
       </div>
     </div>
@@ -151,19 +172,21 @@ tr{page-break-inside:avoid;break-inside:avoid}
       <div class="card">
         <h2>Entregables + Bitácoras + Listas</h2>
         <ul style="font-size:12px">
-          <li>☐ Matriz de faltantes (Excel)</li>
-          <li>☐ Carpeta en Drive con PDFs</li>
-          <li>☐ Lista de asistencia BEA/PC/Alcaldía (Lic. Adolfo)</li>
-          <li>☐ Lista de asistencia AMAS (perros de servicio)</li>
-          <li>☐ Guion para autoridades + Protocolo antidiscriminación</li>
-          <li>☐ Bitácoras firmadas + Constancias + Fotos</li>
+          <li><span class="chk" role="checkbox" tabindex="0" aria-checked="false">☐</span> Matriz de faltantes (Excel)</li>
+          <li><span class="chk" role="checkbox" tabindex="0" aria-checked="false">☐</span> Carpeta en Drive con PDFs</li>
+          <li><span class="chk" role="checkbox" tabindex="0" aria-checked="false">☐</span> Lista de asistencia BEA/PC/Alcaldía (Lic. Adolfo)</li>
+          <li><span class="chk" role="checkbox" tabindex="0" aria-checked="false">☐</span> Lista de asistencia AMAS (perros de servicio)</li>
+          <li><span class="chk" role="checkbox" tabindex="0" aria-checked="false">☐</span> Guion para autoridades + Protocolo antidiscriminación</li>
+          <li><span class="chk" role="checkbox" tabindex="0" aria-checked="false">☐</span> Bitácoras firmadas + Constancias + Fotos</li>
         </ul>
       </div>
       <div class="card">
         <h2>Formatos</h2>
         <div style="border:1.5px solid #0f2a44;border-radius:10px;padding:12px;font-size:11px">
-          <div>Fecha: ___/___/2026 – Unidad: Del Valle / Nápoles / Roma / Centro de Producción</div>
-          <div style="margin-top:8px">Hallazgos:<div class="input" style="min-height:44px;margin-top:4px"></div></div>
+          <div>Fecha: <span class="edit" contenteditable="true" spellcheck="false" data-single data-ph="___/___/2026"></span> · Unidad: <span class="edit" contenteditable="true" spellcheck="false" data-single data-ph="Del Valle / Nápoles / Roma / Producción"></span></div>
+          <div style="margin-top:8px">Hallazgos:
+            <div class="input edit-box" contenteditable="true" spellcheck="false" data-ph="Escribe aquí los hallazgos…"></div>
+          </div>
           <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px"><div class="sig-line">Firma RU</div><div class="sig-line">Firma Lic. Miguel Coyotecatl</div></div>
         </div>
         <div style="margin-top:12px;background:#0f2a44;color:#fff;border-radius:10px;padding:12px;font-size:12px"><strong style="color:#c5a46b">Guion antidiscriminación:</strong> «Bienvenido. Por política de inclusión y para evitar cualquier discriminación, los perros de servicio son bienvenidos.»</div>
@@ -174,6 +197,56 @@ tr{page-break-inside:avoid;break-inside:avoid}
 </div>
 
 <script>
+/* ── Logo: se convierte a base64 al abrir la página ──
+   Así el PDF siempre lo incluye (los data URL no tienen restricciones CORS). */
+(function(){
+  fetch('https://i.ibb.co/6Jng0Z5S/29d572b7-060d-4258-a958-7776e1c86054.jpg')
+    .then(r => { if (!r.ok) throw new Error(); return r.blob(); })
+    .then(b => new Promise((res, rej) => {
+      const fr = new FileReader();
+      fr.onload = () => res(fr.result);
+      fr.onerror = rej;
+      fr.readAsDataURL(b);
+    }))
+    .then(dataUrl => { document.querySelectorAll('img.logo').forEach(i => i.src = dataUrl); })
+    .catch(() => { /* Si falla, se conserva la URL original */ });
+})();
+
+/* ── Campos editables ── */
+document.querySelectorAll('[contenteditable]').forEach(el => {
+  const single = el.hasAttribute('data-single');
+  // En campos de una línea, Enter cierra la edición en lugar de crear saltos
+  el.addEventListener('keydown', e => {
+    if (single && e.key === 'Enter'){ e.preventDefault(); el.blur(); }
+  });
+  // Pega siempre como texto plano (evita que se pegue formato ajeno al documento)
+  el.addEventListener('paste', e => {
+    e.preventDefault();
+    let t = (e.clipboardData || window.clipboardData).getData('text/plain');
+    if (single) t = t.replace(/\s+/g, ' ').trim();
+    document.execCommand('insertText', false, t);
+  });
+  // Al borrar todo, restaura el placeholder (los navegadores dejan un <br> fantasma)
+  el.addEventListener('input', () => {
+    const h = el.innerHTML.toLowerCase();
+    if (h === '<br>' || h === '<div><br></div>' || h === '&nbsp;') el.innerHTML = '';
+  });
+});
+
+/* ── Casillas ☐: clic o Enter/Espacio para marcar ── */
+document.querySelectorAll('.chk').forEach(el => {
+  const toggle = () => {
+    const on = el.textContent === '☑';
+    el.textContent = on ? '☐' : '☑';
+    el.setAttribute('aria-checked', on ? 'false' : 'true');
+  };
+  el.addEventListener('click', toggle);
+  el.addEventListener('keydown', e => {
+    if (e.key === ' ' || e.key === 'Enter'){ e.preventDefault(); toggle(); }
+  });
+});
+
+/* ── Exportar a PDF (idéntico en PC y smartphone) ── */
 let exporting = false;
 
 async function exportToPDF(){
@@ -202,7 +275,7 @@ async function exportToPDF(){
   };
 
   try {
-    // Espera a que las fuentes estén cargadas (evita tipografías incorrectas en el PDF)
+    // Espera a que las fuentes estén cargadas
     if (document.fonts && document.fonts.ready) await document.fonts.ready;
 
     // Clon fuera de pantalla con ancho fijo: el PDF sale idéntico en PC y smartphone
@@ -213,13 +286,18 @@ async function exportToPDF(){
 
     const clone = original.cloneNode(true);
     clone.removeAttribute('id');
-    // Fuerza el diseño de escritorio dentro del clon
-    // (en móvil las media queries seguirían viendo una pantalla angosta)
     clone.querySelectorAll('.grid2').forEach(el => el.style.gridTemplateColumns = '1fr 1fr');
     clone.querySelectorAll('.header').forEach(el => el.style.padding = '28px 32px');
     clone.querySelectorAll('.header h1').forEach(el => el.style.fontSize = '30px');
+    // El clon conserva el texto escrito y las casillas marcadas; solo se desactiva la edición
+    clone.querySelectorAll('[contenteditable]').forEach(el => el.setAttribute('contenteditable','false'));
     holder.appendChild(clone);
     document.body.appendChild(holder);
+
+    // Espera a que el logo esté listo dentro del clon
+    await Promise.all(Array.from(clone.querySelectorAll('img')).map(img =>
+      img.complete ? Promise.resolve() : new Promise(res => { img.onload = img.onerror = res; })
+    ));
 
     const opt = {
       margin: [10, 10, 10, 10],
